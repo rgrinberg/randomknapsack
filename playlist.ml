@@ -14,7 +14,7 @@ module PlaylistMaker (S : Songlist) = struct
   let dist p1 p2 =  abs (p1 - p2)
 
   let random_song ~playlist = 
-    (*keep trying to add element until we succeed*)
+    (*keep trying to draw element until we succeed*)
     let rec loop () = 
       let rnd = (Random.int S.pool_size) in
       if (playlist |> BatSet.mem rnd) 
@@ -26,7 +26,7 @@ module PlaylistMaker (S : Songlist) = struct
     try BatSet.remove (BatSet.enum playlist |> Random.choice) playlist
     (*
      *sometimes we got some exception here probably because we are trying to
-     *remove an element that isn't there so we just ignore it
+     *remove an element from an empty playlist
      *)
     with _ -> playlist
 
